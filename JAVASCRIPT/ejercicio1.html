@@ -64,9 +64,15 @@
     <div class="azul"></div>
 </div>
 <div class="botonera">
-<button>Ocultasion</button>
-<button>Ocultasion</button>
-<button>Ocultasion</button>
+<button onclick="ocultar_aparecer('roja')">Ocultasion</button>
+<button onclick="ocultar_aparecer('verde')">Ocultasion</button>
+<button onclick="ocultar_aparecer('azul')">Ocultasion</button>
 </div>
+<script>
+     function ocultar_aparecer(id){
+            document.getElementsByClassName(id)[0].style.visibility="hidden";
+            
+        }
+</script>
 </body>
 </html>
