@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversor de monedas</title>
+</head>
+<body>
+    <h1>CONVERSOR DE MONEDAS</h1>
+    <input id="cantidad" type="text" placeholder="Introduzca cantidad"><br>
+    <p id="resultado"></p>
+    <button onclick="calcular('euros')">Calcular a euros</button><br>
+    <button onclick="calcular('dolares')">Calcular a dolares</button><br>
+    <script>
+        function calcular(divisa){
+            let valor = document.getElementById("cantidad").value
+            let resultado = 0 //esta linea sirve para declarar un valor inicial
+
+            if (divisa == "euros"){
+                resultado = valor * 0.91;
+                document.getElementById("resultado").innerHTML = resultado + '€';
+            
+            }
+            else {
+                resultado = valor * 1.09;
+                document.getElementById("resultado").innerHTML = resultado + '$';
+            }
+
+        };
+    </script>
+</body>
+</html>

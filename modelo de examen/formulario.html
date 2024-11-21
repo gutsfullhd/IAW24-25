@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulario</title>
+    <style>
+        .error{
+            color: red;
+        }
+    </style>
 </head>
 <body>
     <h1>Formulario</h1>
@@ -14,9 +19,20 @@
     <label for="">EMAIL</label><input type="email" id="email"><br>
     <label for="">Contraseña</label><input type="password" id="contraseña"><br>
     <label for="">Repetir Contraseña</label><input type="password" id="contraseña1"><br>
-    <label for="">Descripción</label><textarea name="descripción" rows="10" cols="30"></textarea>
+    <label for="">Descripción</label><textarea name="descripción" rows="10" cols="30"></textarea><br>
     <label for="">Fecha de nacimiento</label><input type="date" name="fecha_de_nacimiento" id="fnacimineto"><br>
-    <label for="">Tratamientos de datos personales</label><input type="checkbox" name="datos_personales"  id="datos_personales">
+    <label for="">Tratamientos de datos personales</label><input type="checkbox" name="datos_personales"  id="datos_personales"><br>
+    <button onclick="enviar()">Enviar</button>
+    <p id="errornombre" class="error"></p>
+    <p id="errorapellido1" class="error"></p>
+    <p id="errorapellido2" class="error"></p>
+    <p id="errorDNI" class="error"></p>
+    <p id="erroremail" class="error"></p>
+    <p id="errorcontraseña" class="error"></p>
+    <p id="errorcontraseña1" class="error"></p>
+    <p id="errorfnacimiento" class="error"></p>
+    <p id="errordatos_personales" class="error"></p>
+
 
     <script>
         function enviar(){
@@ -28,7 +44,11 @@
             let contraseña
             let contraseña1
             let fnacimiento
-            let 
+            let datos_personales
+
+            if (nombre == ""){
+                document.getElementById("nombre").innerHTML = "Debes rellenar este campo"
+            }
         }
     </script>
 
