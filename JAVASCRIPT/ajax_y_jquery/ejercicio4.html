@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokémon INFOPOKEMON</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h1>LA POKEDEX DE TU BARRIO</h1>
+    <input type="text" id="nombrepokemon" placeholder="ESPABILA Y BUSCA A TU POKEMON Pokémon name or ID">
+    <button id="buscapokemon">Search</button>
+    <div id="INFOPOKEMON"></div>
+
+    <script>
+        $(document).ready(function() {
+            $("#buscapokemon").click(function() {
+                const pokemon = $("#nombrepokemon").val().toLowerCase();
+                $.ajax({
+                    url: `https://pokeapi.co/api/v2/pokemon/${pokemon}`,
+                    method: "GET",
+                    success: function(data) {
+                        $("#INFOPOKEMON").html(`
+                            <h2>${data.name}</h2>
+                            <img src="${data.sprites.front_default}" alt="${data.name}">
+                            <p><strong>Height:</strong> ${data.height}</p>
+                            <p><strong>Weight:</strong> ${data.weight}</p>
+                            <p><strong>Type:</strong> ${data.types.map(type => type.type.name).join(", ")}</p>
+                        `);
+                    },
+                    error: function() {
+                        $("#INFOPOKEMON").html("<p>NO TE INVENTES POKEMON HERMANO</p>");
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

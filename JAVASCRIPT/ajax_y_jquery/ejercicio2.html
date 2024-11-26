@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galería</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        #gallery img {
+            width: 100px;
+            margin: 5px;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <h1>Photo Gallery</h1>
+    <button id="carga_galeria">Load Gallery</button>
+    <div id="galeria"></div>
+
+    <script>
+    $(document).ready(function() {
+        $("#carga_galeria").click(function() {
+        $.ajax({
+        url: "https://jsonplaceholder.typicode.com/photos",
+        method: "GET",
+        success: function(photos) {
+        $("#galeria").html("");
+        photos.slice(0, 20).forEach(photo => {
+        $("#galeria").append(`<img src="${photo.thumbnailUrl}" alt="${photo.title}" title="${photo.title}">`);
+                    });
+                }
+            });
+        });
+    });
+    </script>
+</body>
+</html>
