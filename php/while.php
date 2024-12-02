@@ -1,3 +1,9 @@
+<!DOCTYPE html>
+<html>
+<head>
+<h1>WHILE</h1>
+</head>
+<body>
 <?php
 
  $numero = 1; //Empezamos por numero
@@ -9,3 +15,5 @@
   }
 echo "</table>";
 ?>
+</body>
+</html>
