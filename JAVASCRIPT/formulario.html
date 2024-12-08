@@ -115,9 +115,7 @@
                 document.getElementById("errordni").innerHTML = ""; 
             }
             if (pin.length !== 8 || isNaN(pin)) {
-                mensajes.className = "error";
-                mensajes.innerHTML = "El PIN debe contener exactamente 8 dígitos.";
-                return;
+                document.getElementById("errorpin12").innerHTML = "El pin debe tener 8 digitos"
             }
             
         
