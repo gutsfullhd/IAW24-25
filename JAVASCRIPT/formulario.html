@@ -114,12 +114,24 @@
             else {
                 document.getElementById("errordni").innerHTML = ""; 
             }
+            if (pin.length !== 8 || isNaN(pin)) {
+                mensajes.className = "error";
+                mensajes.innerHTML = "El PIN debe contener exactamente 8 dígitos.";
+                return;
+            }
+            
         
         }
 
     function validadni(dni) {
   const regex = /^\d{1,8}[A-Za-z]$/;
   return regex.test(dni);
+    }
+    function generarUsuario(nombre, apellido, telefono) {
+            let primerasLetrasNombre = nombre.substring(0, 2).toUpperCase();
+            let primerasLetrasApellido = apellido.substring(0, 2).toUpperCase();
+            let ultimosDigitosTelefono = telefono.slice(-3);
+            return `${primerasLetrasNombre}${primerasLetrasApellido}${ultimosDigitosTelefono}`;
     }
     </script>
 </body>
