@@ -23,7 +23,15 @@
     <input type="text" value="">
     <button>Ver val()</button>
     <script>
-       /* Incluye aquí el código jQuery */
+          $(document).ready(function() {
+      
+        $("button").click(function() {
+          
+            let valor = $("input").val();
+          
+            alert("El valor del campo input es: " + valor);
+        });
+    });
         
     </script>
 </body>

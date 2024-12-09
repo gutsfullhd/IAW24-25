@@ -16,7 +16,7 @@
             border-radius: 10px;
         }
     </style>
-    <!-- Incluye aquí jQuery -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 </head>
 <body>
     <h1>getters en jQuery</h1>
@@ -37,7 +37,25 @@
     <button id="btn-parrafo">Obtener html de un párrafo</button>
 
     <script>
-       /* Rellena aquí el código jQuery */
+       $(document).ready(function () {
+     
+        $("#btn-imagen").click(function () {
+            const src = $("img").attr("src");
+            alert("El atributo src de la imagen es: " + src);
+        });
+
+  
+        $("#btn-encabezado").click(function () {
+            const encabezado = $("h1").text();
+            alert("El texto del encabezado es: " + encabezado);
+        });
+
+        
+        $("#btn-parrafo").click(function () {
+            const htmlParrafo = $("#parrafo").html();
+            alert("El contenido HTML del párrafo es: " + htmlParrafo);
+        });
+    });
     </script>
 </body>
 </html>

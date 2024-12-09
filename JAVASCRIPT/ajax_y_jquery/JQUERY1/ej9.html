@@ -16,7 +16,7 @@
             border-radius: 10px;
         }
     </style>
-    <!-- Incluye aquí jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 </head>
 <body>
     <h1>Las funciones each y append en jQuery</h1>
@@ -30,7 +30,15 @@
     </ul>
 
     <script>
-        /* Rellena aquí el código jQuery */
+            $(document).ready(function () {
+      
+        const iconourl = "https://icons.iconarchive.com/icons/custom-icon-design/pretty-office-10/24/download-icon.png";
+
+        
+        $("a").each(function () {
+            $(this).append(`<img src="${iconourl}" alt="Icono de descarga" style="margin-left: 5px;">`);
+        });
+    });
      </script>
 </body>
 </html>

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Ejercicio 5</title>
-<!-- Incluye jQuery-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <style>
     .contenedor{
         display:flex;
@@ -40,7 +40,23 @@
         <button id="btn-fadeIn">fadeIn</button><button id="btn-fadeOut">fadeOut</button><button id="btn-fadeToggle">fadeToggle</button>
     </div>
     <script>
-        /* Rellena esta parte con el código jQuery */
+       $(document).ready(function () {
+
+    $("#btn-fadeIn").click(function () {
+        $(".caja").fadeIn("slow");
+    });
+
+
+    $("#btn-fadeOut").click(function () {
+        $(".caja").fadeOut("slow");
+    });
+
+   
+    $("#btn-fadeToggle").click(function () {
+        $(".caja").fadeToggle("slow");
+    });
+});
+
     </script>
 </body>
 </html>

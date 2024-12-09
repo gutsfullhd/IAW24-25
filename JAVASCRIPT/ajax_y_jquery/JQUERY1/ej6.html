@@ -18,7 +18,19 @@
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <script>
-        /* Código jQuery */
+          $(document).ready(function () {
+          
+            const numEncabezados = $("h1, h2, h3, h4, h5, h6").length;
+            const numParrafos = $("p").length;
+            const numImagenes = $("img").length;
+            const numEnlaces = $("a").length;
+
+           
+            $("#encabezados").text(numEncabezados);
+            $("#parrafos").text(numParrafos);
+            $("#imagenes").text(numImagenes);
+            $("#enlaces").text(numEnlaces);
+        });
     </script>
 </head>
 <body>

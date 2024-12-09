@@ -24,9 +24,20 @@
     <div>
         Texto
     </div>
-    <button>Vaciar div</button>
+    <button id="btn-empty">Vaciar div</button>
+    <button id="btn-toggle">Mostrar/Ocultar texto</button>
     <script>
-       /* Incluye aquí el código jQuery */
+         $(document).ready(function() {
+            // Vaciar el contenido del div
+            $("#btn-empty").click(function() {
+                $("div").empty(); // Vacía el contenido del div
+            });
+
+            // Alternar la visibilidad del texto
+            $("#btn-toggle").click(function() {
+                $("div").toggleClass("hidden"); // Agrega o elimina la clase 'hidden'
+            });
+        });
     </script>
 </body>
 </html>
