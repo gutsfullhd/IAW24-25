@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario</title>
+<style>
+    .error{
+        color: red;
+    }
+</style>
+</head>
+<body>
+    <h1>Formulario</h1>
+
+     <form>
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" placeholder="Escribe aqui tu nombre" required><br><br>
+        <label for="apellido">Apellido:</label>
+        <input type="text" id="apellido" placeholder="Escribe aqui tu apellido" required><br><br>
+        <label for="email">Correo electronico:</label>
+        <input type="email" id="email" placeholder="Escribe aqui tu email" required><br><br>
+        <label for="direc">Dirección:</label>
+        <input type="text" id="direc" placeholder="Escribe aqui tu dirección"><br><br>
+        <label for="Ciudad">Ciudad:</label>
+        <input type="text" id="ciudad" placeholder="Escribe aqui tu ciudad"><br><br>
+        <label for="telefono">Telefono:</label>
+        <input type="text" id="telefono" placeholder="Escribe aqui tu telefono"><br><br>
+        <label for="DNI">DNI:</label>
+        <input type="text" id="dni" placeholder="Ingresa aqui tu DNI" required><br><br>
+        <label for="pin">PIN:</label>
+        <input type="password" id="pin" placeholder="Escribe aqui tu PIN" required><br><br>
+        <label for="pin2">PIN:</label>
+        <input type="password" id="pin2" placeholder="Vuelve a escribir tu PIN" required><br><br>
+        <button onclick="validar()" type="submit">Enviar</button>
+        <p id="errornombre" class="error"></p>
+        <p id="errorapellido" class="error"></p>
+        <p id="erroremail" class="error"></p>
+        <p id="errordirec" class="error"></p>
+        <p id="errorciudad" class="error"></p>
+        <p id="errortelefono" class="error"></p>
+        <p id="errordni" class="error"></p>
+        <p id="errorpin" class="error"></p>
+        <p id="errorpin2" class="error"></p>
+        <p id="errorpin12" class="error"></p>
+    </form>
+
+    <script>
+        function validar(){
+            var nombre = document.getElementById("nombre").value.trim();
+            var apellido = document.getElementById("apellido").value.trim();
+            var email = document.getElementById("email").value.trim();
+            var direc = document.getElementById("direc").value.trim();
+            var ciudad = document.getElementById("ciudad").value.trim();
+            var telefono = document.getElementById("telefono").value.trim();
+            var dni = document.getElementById("dni").value.trim();
+            var pin = document.getElementById("pin").value.trim();
+            var pin2 = document.getElementById("pin2").value.trim();
+        
+            if(nombre == ""){
+                document.getElementById("errornombre").innerHTML = "Debes rellenar el campo de nombre para continuar";
+            }
+            else{
+                document.getElementById("errornombre").innerHTML = ""
+            }
+            if(apellido == ""){
+                document.getElementById("errorapellido").innerHTML = "Debes rellenar el campo de apellido para continuar";
+            }
+            else{
+                document.getElementById("errorapellido").innerHTML = ""
+            }
+            if(email == ""){
+                document.getElementById("erroremail").innerHTML = "Debes rellenar el campo de email para continuar";
+            }
+            else{
+                document.getElementById("erroremail").innerHTML = ""
+            }
+            if(direc == ""){
+                document.getElementById("errordirec").innerHTML = "Debes rellenar el campo de Dirección para continuar";
+            }
+            else{
+                document.getElementById("errordirec").innerHTML = ""
+            }
+            if(ciudad == ""){
+                document.getElementById("errorciudad").innerHTML = "Debes rellenar el campo de Ciudad para continuar";
+            }
+            else{
+                document.getElementById("errorciudad").innerHTML = ""
+            }
+            if(telefono == ""){
+                document.getElementById("errortelefono").innerHTML = "Debes rellenar el campo de telefono para continuar";
+            }
+            else{
+                document.getElementById("errortelefono").innerHTML = ""
+            }
+            if(pin == ""){
+                document.getElementById("errorpin").innerHTML = "Debes rellenar el campo de pin para continuar";
+            }
+            else{
+                document.getElementById("errorpin").innerHTML = ""
+            }
+            if(pin2 == ""){
+                document.getElementById("errorpin2").innerHTML = "Debes rellenar el campo de pin2 para continuar";
+            }
+            else{
+                document.getElementById("errorpin2").innerHTML = ""
+            }
+            if(pin !== pin2){
+                document.getElementById("errorpin12").innerHTML = "El pin no coinciden";
+            }
+            if(!validadni(dni)){
+                document.getElementById("errordni").innerHTML = "El dni no es valido";
+            }
+            else {
+                document.getElementById("errordni").innerHTML = ""; 
+            }
+            if (pin.length !== 8 || isNaN(pin)) {
+                document.getElementById("errorpin12").innerHTML = "El pin debe tener 8 digitos"
+            }
+            
+        
+        }
+
+    function validadni(dni) {
+  const regex = /^\d{1,8}[A-Za-z]$/;
+  return regex.test(dni);
+    }
+    function generarUsuario(nombre, apellido, telefono) {
+            let primerasLetrasNombre = nombre.substring(0, 2).toUpperCase();
+            let primerasLetrasApellido = apellido.substring(0, 2).toUpperCase();
+            let ultimosDigitosTelefono = telefono.slice(-3);
+            return `${primerasLetrasNombre}${primerasLetrasApellido}${ultimosDigitosTelefono}`;
+    }
+    </script>
+</body>
+</html>

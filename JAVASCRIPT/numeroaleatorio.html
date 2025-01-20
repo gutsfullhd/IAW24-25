@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adivina el numero</title>
+</head>
+<body>
+    <h1>Adivina el numero del 1 al 5</h1>
+    <label for="numero">Adivina:</label><input type="text" id="numero" placeholder="Ingrese aqui tu numero del 1 al 5">
+    <button onclick="adivinar()">Adivina</button>
+    <p id="mensaje"></p>
+
+    <script>
+
+function adivinar(){
+
+let num=document.getElementById('numero').value;
+let ran=Math.ceil(Math.random()*5);
+if(num<1 || num>5){
+       document.getElementById("mensaje").innerHTML = "El número debe estar comprendido entre 1 y 5";
+}
+else if(ran!=num){
+    document.getElementById("mensaje").innerHTML = "Has fallado";
+}
+else{
+    document.getElementById("mensaje").innerHTML = "Has acertado";
+}
+}
+    </script>
+
+</body>
+</html>

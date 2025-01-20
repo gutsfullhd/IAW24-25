@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario</title>
+    <style>
+        .error{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1>Formulario de contacto</h1>
+<form>
+    <label for="asunto">Asunto*:</label>
+    <input type="text" id="asunto" required> <p id="errorasunto" class="error"></p><br><br>
+    <label for="DNI">DNI/NIE*:</label>
+    <input type="text" id="dni"  required> <p id="errordni" class="error"></p><br><br>
+    <label for="nombre">Nombre*:</label>
+    <input type="text" id="nombre" required> <p id="errornombre" class="error"></p><br><br>
+    <label for="apellido1"> Primer Apellido*:</label>
+    <input type="text" id="apellido1"  required><p id="errorapellido1" class="error"></p><br><br>
+    <label for="apellido2"> Segundo Apellido:</label>
+    <input type="text" id="apellido2" ><p id="errorapellido2" class="error"></p><br><br>
+    <label for="fnacimiento">Fecha de Nacimiento:(dd/mm/yyyy)*</label>
+    <input type="text" id="fnacimiento" required> <p id="errorfnacimiento" class="error"></p><br><br>
+    <label for="telefono">Telefono de contacto*:</label>
+    <input type="text" id="telefono" required> <p id="errortelefono" class="error"></p><br><br>
+    <label for="email">Correo electronico (para respuesta):</label>
+    <input type="email" id="email"> <p id="erroremail" class="error"></p><br><br>
+    <label for="domicilio">Domicilio*:</label>
+    <input type="text" id="domicilio" required> <p id="errordomicilio" class="error"></p><br><br>
+    <label for="codpostal">Codigo postal*:</label>
+    <input type="text" id="codpostal"  required> <p id="errorcodpostal" class="error"></p><br><br>
+    <label for="municipio">Municipio*:</label>
+    <select class="form-control" name="clave" id="municipio" required>
+        <option value="0">Selecciona Municipio</option>
+        <option value="41001">Aguadulce</option>
+        <option value="41002">Alanís</option>
+        <option value="41003">Albaida del Aljarafe</option>
+        <option value="41004">Alcalá de Guadaíra</option>
+        <option value="41005">Alcalá del Río</option>
+        <option value="41006">Alcolea del Río</option>
+        <option value="41007">Algaba (La)</option>
+        <option value="41008">Algámitas</option>
+        <option value="41009">Almadén de la Plata</option>
+        <option value="41010">Almensilla</option>
+        <option value="41011">Arahal</option>
+        <option value="41012">Aznalcázar</option>
+        <option value="41013">Aznalcóllar</option>
+        <option value="41014">Badolatosa</option>
+        <option value="41015">Benacazón</option>
+        <option value="41016">Bollullos de la Mitación</option>
+        <option value="41017">Bormujos</option>
+        <option value="41018">Brenes</option>
+        <option value="41019">Burguillos</option>
+        <option value="41020">Cabezas de San Juan (Las)</option>
+        <option value="41021">Camas</option>
+        <option value="41022">Campana (La)</option>
+        <option value="41023">Cantillana</option>
+        <option value="41901">Cañada Rosal</option>
+        <option value="41024">Carmona</option>
+        <option value="41025">Carrión de los Céspedes</option>
+        <option value="41026">Casariche</option>
+        <option value="41027">Castilblanco de los Arroyos</option>
+        <option value="41028">Castilleja de Guzmán</option>
+        <option value="41029">Castilleja de la Cuesta</option>
+        <option value="41030">Castilleja del Campo</option>
+        <option value="41031">Castillo de las Guardas (El)</option>
+        <option value="41032">Cazalla de la Sierra</option>
+        <option value="41033">Constantina</option>
+        <option value="41034">Coria del Río</option>
+        <option value="41035">Coripe</option>
+        <option value="41036">Coronil (El)</option>
+        <option value="41037">Corrales (Los)</option>
+        <option value="41903">Cuervo de Sevilla (El)</option>
+        <option value="41038">Dos Hermanas</option>
+        <option value="41039">Ecija</option>
+        <option value="41040">Espartinas</option>
+        <option value="41041">Estepa</option>
+        <option value="41042">Fuentes de Andalucía</option>
+        <option value="41043">Garrobo (El)</option>
+        <option value="41044">Gelves</option>
+        <option value="41045">Gerena</option>
+        <option value="41046">Gilena</option>
+        <option value="41047">Gines</option>
+        <option value="41048">Guadalcanal</option>
+        <option value="41049">Guillena</option>
+        <option value="41050">Herrera</option>
+        <option value="41051">Huévar del Aljarafe</option>
+        <option value="41902">Isla Mayor</option>
+        <option value="41052">Lantejuela</option>
+        <option value="41053">Lebrija</option>
+        <option value="41054">Lora de Estepa</option>
+        <option value="41055">Lora del Río</option>
+        <option value="41056">Luisiana (La)</option>
+        <option value="41057">Madroño (El)</option>
+        <option value="41058">Mairena del Alcor</option>
+        <option value="41059">Mairena del Aljarafe</option>
+        <option value="41060">Marchena</option>
+        <option value="41061">Marinaleda</option>
+        <option value="41062">Martín de la Jara</option>
+        <option value="41063">Molares (Los)</option>
+        <option value="41064">Montellano</option>
+        <option value="41065">Morón de la Frontera</option>
+        <option value="41066">Navas de la Concepción (Las)</option>
+        <option value="41067">Olivares</option>
+        <option value="41068">Osuna</option>
+        <option value="41069">Palacios y Villafranca (Los)</option>
+        <option value="41904">Palmar de Troya (El)</option>
+        <option value="41070">Palomares del Río</option>
+        <option value="41071">Paradas</option>
+        <option value="41072">Pedrera</option>
+        <option value="41073">Pedroso (El)</option>
+        <option value="41074">Peñaflor</option>
+        <option value="41075">Pilas</option>
+        <option value="41076">Pruna</option>
+        <option value="41077">Puebla de Cazalla (La)</option>
+        <option value="41078">Puebla de los Infantes (La)</option>
+        <option value="41079">Puebla del Río (La)</option>
+        <option value="41080">Real de la Jara (El)</option>
+        <option value="41081">Rinconada (La)</option>
+        <option value="41082">Roda de Andalucía (La)</option>
+        <option value="41083">Ronquillo (El)</option>
+        <option value="41084">Rubio (El)</option>
+        <option value="41085">Salteras</option>
+        <option value="41086">San Juan de Aznalfarache</option>
+        <option value="41088">San Nicolás del Puerto</option>
+        <option value="41087">Sanlúcar la Mayor</option>
+        <option value="41089">Santiponce</option>
+        <option value="41090">Saucejo (El)</option>
+        <option value="41091">Sevilla</option>
+        <option value="41092">Tocina</option>
+        <option value="41093">Tomares</option>
+        <option value="41094">Umbrete</option>
+        <option value="41095">Utrera</option>
+        <option value="41096">Valencina de la Concepción</option>
+        <option value="41097">Villamanrique de la Condesa</option>
+        <option value="41100">Villanueva de San Juan</option>
+        <option value="41098">Villanueva del Ariscal</option>
+        <option value="41099">Villanueva del Río y Minas</option>
+        <option value="41101">Villaverde del Río</option>
+        <option value="41102">Viso del Alcor (El)</option>
+    </select> <p id="errorciudad" class="error"></p><br><br>
+    <label for="oficina">Oficina:*</label>
+    <select class="form-control" name="oficina" id="oficina" required>
+    <option value="0">Escoge alguna oficina</option>
+    <option value="1">Oficina 1</option>
+    <option value="2">Oficina 2</option>
+    <option value="3">Oficina 3</option>
+    <option value="4">Oficina 4</option>
+    </select><br><br>
+    <label for="info">Información requerida:*</label>
+    <textarea name="info" rows="10" cols="30" id="info" required></textarea> <p id="errorinfo" class="error"></p><br><br>
+
+    <label for="anexo1">Fichero Anexo I(máximo 2MB):</label><br><br>
+
+    <label for="anexo1">Fichero Anexo I(máximo 2MB):</label><br><br>
+
+    <label for="">He leido y acepto la politica de datos y normas de uso *</label>
+    <input type="checkbox" name="politicas"  id="politicas" required> <p id="errorpoliticas" class="error"></p><br><br>
+
+    <button onclick="validar()" type="submit">Enviar</button>
+
+</form>
+
+<script>
+   function validar(){
+     var asunto = document.getElementById("asunto").value.trim();
+     var dni = document.getElementById("dni").value.trim();
+     var nombre = document.getElementById("nombre").value.trim();
+     var apellido1 = document.getElementById("apellido1").value.trim();
+     var apellido2 = document.getElementById("apellido2").value.trim();
+     var fnacimiento = document.getElementById("fnacimiento").value.trim();
+     var telefono = document.getElementById("telefono").value.trim();
+     var email = document.getElementById("email").value.trim();
+     var domicilio = document.getElementById("domicilio").value.trim();
+     var codpostal = document.getElementById("codpostal").value.trim();
+     var municipio = document.getElementById("municipio").value.trim();
+     var oficina = document.getElementById("oficina").value.trim();
+     var info = document.getElementById("info").value.trim();
+     var politicas = document.getElementById("politicas").value.trim();
+
+
+     if(asunto == ""){
+                document.getElementById("errorasunto").innerHTML = "Debes rellenar el campo";
+            }
+            else{
+                document.getElementById("errorasunto").innerHTML = ""
+            }
+    if(dni == ""){
+        document.getElementById("errordni").innerHTML = "Debes rellenar el campo";
+    }
+    else{
+     document.getElementById("errordni").innerHTML = ""
+         }
+    if(nombre == ""){
+       document.getElementById("errornombre").innerHTML = "Debes rellenar el campo";
+    }
+    else{
+    document.getElementById("errornombre").innerHTML = ""
+    }
+    if(apellido1 == ""){
+                document.getElementById("errorapellido1").innerHTML = "Debes rellenar el campo";
+            }
+            else{
+                document.getElementById("errorapellido1").innerHTML = ""
+            }
+            if(apellido2 == ""){
+                document.getElementById("errorapellido2").innerHTML = "Debes rellenar el campo";
+            }
+            else{
+                document.getElementById("errorapellido2").innerHTML = ""
+            }
+            if(fnacimiento == ""){
+                document.getElementById("errorfnacimiento").innerHTML = "Debes rellenar el campo";
+            }
+            else{
+                document.getElementById("errorfnacimiento").innerHTML = ""
+            }
+            if(telefono == ""){
+                document.getElementById("errortelefono").innerHTML = "Debes rellenar el campo";
+            }
+            else{
+                document.getElementById("errortelefono").innerHTML = ""
+            }
+            if(email == ""){
+                document.getElementById("erroremail").innerHTML = "Debes rellenar el campo";
+            }
+            else{
+                document.getElementById("erroremail").innerHTML = ""
+            }
+            if(domicilio == ""){
+                document.getElementById("errordomicilio").innerHTML = "Debes rellenar el campo";
+            }
+            else{
+                document.getElementById("errordomicilio").innerHTML = ""
+            }
+            if(codpostal == ""){
+                document.getElementById("errorcodpostal").innerHTML = "Debes rellenar el campo";
+            }
+            else{
+                document.getElementById("errorcodpostal").innerHTML = ""
+            }
+            if(municipio == 0){
+                document.getElementById("errormunicipio").innerHTML = "Debes rellenar el campo";
+            }
+            else{
+                document.getElementById("errormunicipio").innerHTML = ""
+            }
+            if(oficina == 0){
+                document.getElementById("erroroficina").innerHTML = "Debes rellenar el campo";
+            }
+            else{
+                document.getElementById("erroroficina").innerHTML = ""
+            }
+            if(info == ""){
+                document.getElementById("errorinfo").innerHTML = "Debes rellenar el campo";
+            }
+            else{
+                document.getElementById("errorinfo").innerHTML = ""
+            }
+            if(!politicas.checked){
+                document.getElementById("errorpoliticas").innerHTML = "Debes rellenar el campo";
+            }
+            else{
+                document.getElementById("errorpoliticas").innerHTML = ""
+            }
+            if(!validadni(dni)){
+                document.getElementById("errordni").innerHTML = "El dni no es valido";
+            }
+    
+
+   }
+
+   function validadni(){
+    let letras=['T','R','W','A','G','M','Y','F','P','D','X','B','N','J','Z','S','Q','V','H','L','C','K','E'];
+            let numero = parseInt(document.getElementById("dni").value);
+            let resto = numero % 23;
+   }
+</script>
+ 
+
+</body>
+</html>
