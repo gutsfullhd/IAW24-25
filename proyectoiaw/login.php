@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         if ($user && password_verify($password, $user['password'])) {
             $_SESSION['user_id'] = $user['id'];
-            header('Location: dashboard.php');
+            header('Location: actividades.php');
             exit();
         } else {
             $error = "Nombre de usuario o contraseña incorrectos";
@@ -47,3 +47,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </form>
 </body>
 </html>
+
+
