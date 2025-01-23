@@ -1,19 +1,24 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-<h1>WHILE</h1>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WHILE</title>
 </head>
 <body>
-<?php
+    <h1>WHILE</h1>
+    <?php
+        $numero = 1; 
+        $total = 10; 
+        echo "<table border='1'>";
 
- $numero = 1; //Empezamos por numero
- $total = 10; // Llegaos hasta diez
- echo "<table border='1'>";
- while ($numero < $total){
-         echo "<tr><td>" . $numero . "</tr></td>\n";
-         $numero += 1;
-  }
-echo "</table>";
-?>
+        
+        while ($numero <= $total) { 
+            echo "<tr><td>" . $numero . "</td></tr>\n"; 
+            $numero += 1;
+        }
+
+        echo "</table>";
+    ?>
 </body>
 </html>

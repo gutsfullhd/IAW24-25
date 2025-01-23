@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Calcula tu peso</h1>
+    <label for="">Masa:</label><input id="masa" type="text" placeholder="Introduce la masa en kg"><br>
+    <label for="">Velocidad:</label><input id="velocidad"   type="text" placeholder="Intoduce la velocidad en m/s"><br>
+    <button onclick="calcula()">CALCULA TU PESO</button><br>
+    <p id="resultado"></p>
+    <p id="errormasa"></p>
+    <p id="errorvelocidad"></p>
+    <script>
+        function calcula(){
+            var masa = parseFloat(document.getElementById("masa").value);
+            var velocidad = parseFloat(document.getElementById("velocidad").value);
+            var resultado = 0.5 * masa * (velocidad * velocidad);
+            resultado = resultado.toFixed(2);
+
+            if (resultado < 10){
+            resultado = document.getElementById("resultado").innerHTML= "La energía cinética es baja: " + resultado + " Joules"
+            }
+            else if( resultado >= 10 && resultado < 100){
+            resultado = document.getElementById("resultado").innerHTML="La energía cinética es moderada: " + resultado + " Joules"
+            }
+            else if( resultado > 100){
+            resultado = document.getElementById("resultado").innerHTML="La energía cinética es alta: " + resultado +" Joules"
+        } 
+        function validar(){
+            
+            if(masa == ""){
+                document.getElementById("errormasa").innerHTML="Debes rellenar el campo"
+
+            }
+            else{
+                 document.getElementById("errormasa").innerHTML = ""
+            }
+            if(velocidad == ""){
+                document.getElementById("errorvelocidad").innerHTML="Debes rellenar el campo"
+
+            }
+            else{
+                document.getElementById("errormasa").innerHTML = ""
+            }
+
+
+        }
+
+        }
+    </script>
+</body>
+</html>
