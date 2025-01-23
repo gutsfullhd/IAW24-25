@@ -7,6 +7,7 @@ if (!isset($_SESSION['id'])) {
     exit();
 }
 
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $id = $_POST['id'];
     $titulo = $_POST['titulo'];
@@ -25,33 +26,36 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $total_alumnos = $_POST['total_alumnos'];
     $objetivo = $_POST['objetivo'];
 
-    try {
-        $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+ 
+    if ($conn) {
+     
+        $query = "UPDATE actividades 
+                  SET titulo = ?, tipo = ?, departamento = ?, profesor_responsable = ?, trimestre = ?, fecha_inicio = ?, hora_inicio = ?, fecha_fin = ?, hora_fin = ?, organizador = ?, acompanantes = ?, ubicacion = ?, costo = ?, total_alumnos = ?, objetivo = ? 
+                  WHERE id = ?";
+        $stmt = mysqli_prepare($conn, $query);
 
-        $stmt = $conn->prepare("UPDATE actividades SET titulo = :titulo, tipo = :tipo, departamento = :departamento, profesor_responsable = :profesor_responsable, trimestre = :trimestre, fecha_inicio = :fecha_inicio, hora_inicio = :hora_inicio, fecha_fin = :fecha_fin, hora_fin = :hora_fin, organizador = :organizador, acompanantes = :acompanantes, ubicacion = :ubicacion, costo = :costo, total_alumnos = :total_alumnos, objetivo = :objetivo WHERE id = :id");
-        $stmt->bindParam(':id', $id);
-        $stmt->bindParam(':titulo', $titulo);
-        $stmt->bindParam(':tipo', $tipo);
-        $stmt->bindParam(':departamento', $departamento);
-        $stmt->bindParam(':profesor_responsable', $profesor_responsable);
-        $stmt->bindParam(':trimestre', $trimestre);
-        $stmt->bindParam(':fecha_inicio', $fecha_inicio);
-        $stmt->bindParam(':hora_inicio', $hora_inicio);
-        $stmt->bindParam(':fecha_fin', $fecha_fin);
-        $stmt->bindParam(':hora_fin', $hora_fin);
-        $stmt->bindParam(':organizador', $organizador);
-        $stmt->bindParam(':acompanantes', $acompanantes);
-        $stmt->bindParam(':ubicacion', $ubicacion);
-        $stmt->bindParam(':costo', $costo);
-        $stmt->bindParam(':total_alumnos', $total_alumnos);
-        $stmt->bindParam(':objetivo', $objetivo);
-        $stmt->execute();
+        if ($stmt) {
+          
+            mysqli_stmt_bind_param($stmt, "sssssssssssssssi", $titulo, $tipo, $departamento, $profesor_responsable, $trimestre, $fecha_inicio, $hora_inicio, $fecha_fin, $hora_fin, $organizador, $acompanantes, $ubicacion, $costo, $total_alumnos, $objetivo, $id);
 
-        header('Location: dashboard.php');
-        exit();
-    } catch (PDOException $e) {
-        echo "Error: " . $e->getMessage();
+            if (mysqli_stmt_execute($stmt)) {
+              
+                header('Location: dashboard.php');
+                exit();
+            } else {
+                echo "Error al actualizar la actividad: " . mysqli_stmt_error($stmt);
+            }
+
+        
+            mysqli_stmt_close($stmt);
+        } else {
+            echo "Error al preparar la consulta: " . mysqli_error($conn);
+        }
+    } else {
+        die("Error de conexión: " . mysqli_connect_error());
     }
+
+    
+    mysqli_close($conn);
 }
 ?>

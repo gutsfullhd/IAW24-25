@@ -2,12 +2,21 @@
 session_start();
 require 'connect.php';
 
+
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+
 if (!isset($_SESSION['id'])) {
+    echo "Error: No se ha iniciado sesión. Redirigiendo a login.php...";
     header('Location: login.php');
     exit();
 }
 
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    echo "Formulario recibido.<br>";
+
     $titulo = $_POST['titulo'];
     $tipo = $_POST['tipo'];
     $departamento = $_POST['departamento'];
@@ -24,32 +33,61 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $total_alumnos = $_POST['total_alumnos'];
     $objetivo = $_POST['objetivo'];
 
-    try {
-        $conn = new PDO("mysql:host=$servername;dbname=$dbname", $dbuser, $dbpass);
-        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    echo "Datos del formulario recogidos.<br>";
 
-        $stmt = $conn->prepare("INSERT INTO actividades (titulo, tipo, departamento, profesor_responsable, trimestre, fecha_inicio, hora_inicio, fecha_fin, hora_fin, organizador, acompanantes, ubicacion, costo, total_alumnos, objetivo) VALUES (:titulo, :tipo, :departamento, :profesor_responsable, :trimestre, :fecha_inicio, :hora_inicio, :fecha_fin, :hora_fin, :organizador, :acompanantes, :ubicacion, :costo, :total_alumnos, :objetivo)");
-        $stmt->bindParam(':titulo', $titulo);
-        $stmt->bindParam(':tipo', $tipo);
-        $stmt->bindParam(':departamento', $departamento);
-        $stmt->bindParam(':profesor_responsable', $profesor_responsable);
-        $stmt->bindParam(':trimestre', $trimestre);
-        $stmt->bindParam(':fecha_inicio', $fecha_inicio);
-        $stmt->bindParam(':hora_inicio', $hora_inicio);
-        $stmt->bindParam(':fecha_fin', $fecha_fin);
-        $stmt->bindParam(':hora_fin', $hora_fin);
-        $stmt->bindParam(':organizador', $organizador);
-        $stmt->bindParam(':acompanantes', $acompanantes);
-        $stmt->bindParam(':ubicacion', $ubicacion);
-        $stmt->bindParam(':costo', $costo);
-        $stmt->bindParam(':total_alumnos', $total_alumnos);
-        $stmt->bindParam(':objetivo', $objetivo);
-        $stmt->execute();
+    if ($conn) {
+        echo "Conexión a la base de datos establecida.<br>";
 
-        header('Location: dashboard.php');
-        exit();
-    } catch (PDOException $e) {
-        echo "Error: " . $e->getMessage();
+     
+        $query = "INSERT INTO actividades (titulo, tipo, departamento, profesor_responsable, trimestre, fecha_inicio, hora_inicio, fecha_fin, hora_fin, organizador, acompanantes, ubicacion, costo, total_alumnos, objetivo) 
+                  VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $stmt = mysqli_prepare($conn, $query);
+
+        if ($stmt) {
+            echo "Consulta preparada correctamente.<br>";
+
+            
+            mysqli_stmt_bind_param(
+                $stmt,
+                "sssssssssssssis",
+                $titulo,
+                $tipo,
+                $departamento,
+                $profesor_responsable,
+                $trimestre,
+                $fecha_inicio,
+                $hora_inicio,
+                $fecha_fin,
+                $hora_fin,
+                $organizador,
+                $acompanantes,
+                $ubicacion,
+                $costo,
+                $total_alumnos,
+                $objetivo
+            );
+
+            echo "Parámetros vinculados.<br>";
+
+            if (mysqli_stmt_execute($stmt)) {
+                echo "Actividad creada correctamente.<br>";
+                header('Location: actividades.php');
+                exit();
+            } else {
+                echo "Error al ejecutar la consulta: " . mysqli_error($conn) . "<br>";
+            }
+
+           
+            mysqli_stmt_close($stmt);
+        } else {
+            echo "Error al preparar la consulta: " . mysqli_error($conn) . "<br>";
+        }
+    } else {
+        echo "Error de conexión: " . mysqli_connect_error() . "<br>";
     }
+
+    mysqli_close($conn);
+} else {
+    echo "Error: El formulario no se envió correctamente.<br>";
 }
 ?>

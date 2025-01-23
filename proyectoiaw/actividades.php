@@ -1,6 +1,7 @@
 <?php
 session_start();
-require 'connect.php';
+require 'connect.php'; 
+
 
 if (!isset($_SESSION['id'])) {
     header('Location: login.php');
@@ -9,20 +10,29 @@ if (!isset($_SESSION['id'])) {
 
 $id = $_SESSION['id'];
 
-try {
-    $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    $stmt = $conn->query("SELECT * FROM actividades");
-    $actividades = $stmt->fetchAll();
-} catch (PDOException $e) {
-    echo "Error: " . $e->getMessage();
+$actividades = [];
+if ($conn) {
+    $query = "SELECT * FROM actividades";
+    $result = mysqli_query($conn, $query);
+
+    if ($result) {
+        while ($row = mysqli_fetch_assoc($result)) {
+            $actividades[] = $row;
+        }
+    } else {
+        echo "Error: " . mysqli_error($conn);
+    }
+} else {
+    die("Error de conexión: " . mysqli_connect_error());
 }
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
 </head>
 <body>
@@ -66,21 +76,21 @@ try {
     <h2>Actividades</h2>
     <?php foreach ($actividades as $actividad): ?>
         <div>
-            <h3><?php echo $actividad['titulo']; ?></h3>
-            <p>Tipo: <?php echo $actividad['tipo']; ?></p>
-            <p>Departamento: <?php echo $actividad['departamento']; ?></p>
-            <p>Profesor Responsable: <?php echo $actividad['profesor_responsable']; ?></p>
-            <p>Trimestre: <?php echo $actividad['trimestre']; ?></p>
-            <p>Fecha Inicio: <?php echo $actividad['fecha_inicio']; ?></p>
-            <p>Hora Inicio: <?php echo $actividad['hora_inicio']; ?></p>
-            <p>Fecha Fin: <?php echo $actividad['fecha_fin']; ?></p>
-            <p>Hora Fin: <?php echo $actividad['hora_fin']; ?></p>
-            <p>Organizador: <?php echo $actividad['organizador']; ?></p>
-            <p>Acompañantes: <?php echo $actividad['acompanantes']; ?></p>
-            <p>Ubicación: <?php echo $actividad['ubicacion']; ?></p>
-            <p>Costo: <?php echo $actividad['costo']; ?></p>
-            <p>Total Alumnos: <?php echo $actividad['total_alumnos']; ?></p>
-            <p>Objetivo: <?php echo $actividad['objetivo']; ?></p>
+            <h3><?php echo htmlspecialchars($actividad['titulo']); ?></h3>
+            <p>Tipo: <?php echo htmlspecialchars($actividad['tipo']); ?></p>
+            <p>Departamento: <?php echo htmlspecialchars($actividad['departamento']); ?></p>
+            <p>Profesor Responsable: <?php echo htmlspecialchars($actividad['profesor_responsable']); ?></p>
+            <p>Trimestre: <?php echo htmlspecialchars($actividad['trimestre']); ?></p>
+            <p>Fecha Inicio: <?php echo htmlspecialchars($actividad['fecha_inicio']); ?></p>
+            <p>Hora Inicio: <?php echo htmlspecialchars($actividad['hora_inicio']); ?></p>
+            <p>Fecha Fin: <?php echo htmlspecialchars($actividad['fecha_fin']); ?></p>
+            <p>Hora Fin: <?php echo htmlspecialchars($actividad['hora_fin']); ?></p>
+            <p>Organizador: <?php echo htmlspecialchars($actividad['organizador']); ?></p>
+            <p>Acompañantes: <?php echo htmlspecialchars($actividad['acompanantes']); ?></p>
+            <p>Ubicación: <?php echo htmlspecialchars($actividad['ubicacion']); ?></p>
+            <p>Costo: <?php echo htmlspecialchars($actividad['costo']); ?></p>
+            <p>Total Alumnos: <?php echo htmlspecialchars($actividad['total_alumnos']); ?></p>
+            <p>Objetivo: <?php echo htmlspecialchars($actividad['objetivo']); ?></p>
             <form method="POST" action="eliminar.php" style="display:inline;">
                 <input type="hidden" name="id" value="<?php echo $actividad['id']; ?>">
                 <button type="submit">Eliminar</button>
