@@ -1,33 +1,3 @@
-<?php
-session_start();
-require 'connect.php'; 
-
-
-if (!isset($_SESSION['id'])) {
-    header('Location: login.php');
-    exit();
-}
-
-$id = $_SESSION['id'];
-
-
-$actividades = [];
-if ($conn) {
-    $query = "SELECT * FROM actividades";
-    $result = mysqli_query($conn, $query);
-
-    if ($result) {
-        while ($row = mysqli_fetch_assoc($result)) {
-            $actividades[] = $row;
-        }
-    } else {
-        echo "Error: " . mysqli_error($conn);
-    }
-} else {
-    die("Error de conexión: " . mysqli_connect_error());
-}
-?>
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -43,14 +13,27 @@ if ($conn) {
         <input type="hidden" name="create">
         <label>Título:</label>
         <input type="text" name="titulo" required><br>
+        
+      
         <label>Tipo:</label>
-        <input type="text" name="tipo" required><br>
+        <select name="tipo" required>
+            <option value="complementarias">Complementarias</option>
+            <option value="extraescolares">Extraescolares</option>
+        </select><br>
+        
         <label>Departamento:</label>
         <input type="text" name="departamento" required><br>
         <label>Profesor Responsable:</label>
         <input type="text" name="profesor_responsable" required><br>
+        
+        
         <label>Trimestre:</label>
-        <input type="text" name="trimestre" required><br>
+        <select name="trimestre" required>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+        </select><br>
+        
         <label>Fecha Inicio:</label>
         <input type="date" name="fecha_inicio" required><br>
         <label>Hora Inicio:</label>
@@ -73,6 +56,7 @@ if ($conn) {
         <input type="text" name="objetivo" required><br>
         <button type="submit">Crear</button>
     </form>
+
     <h2>Actividades</h2>
     <?php foreach ($actividades as $actividad): ?>
         <div>

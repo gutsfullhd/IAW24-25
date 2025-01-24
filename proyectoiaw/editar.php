@@ -49,7 +49,7 @@ mysqli_close($conn);
 <body>
     <h1>Editar Actividad</h1>
     <?php if ($actividad): ?>
-        <form method="POST" action="update_activity.php">
+        <form method="POST" action="update.php">
             <input type="hidden" name="id" value="<?php echo $actividad['id']; ?>">
             <label>Título:</label>
             <input type="text" name="titulo" value="<?php echo $actividad['titulo']; ?>" required><br>
