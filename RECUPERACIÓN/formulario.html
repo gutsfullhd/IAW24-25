@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario</title>
+    <style>
+        .error{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1>Formulario</h1>
+    <form ><label for="nombre">Nombre*:</label>
+        <input type="text" id="nombre" required> <p id="errornombre" class="error"></p><br><br>
+        <label for="apellido1"> Apellido 1*:</label>
+        <input type="text" id="apellido1"  required><p id="errorapellido1" class="error"></p><br><br>
+        <label for="apellido2"> Apellido 2*:</label>
+        <input type="text" id="apellido2"  required><p id="errorapellido2" class="error"></p><br><br>
+        <label for="DNI">DNI*:</label>
+        <input type="text" id="dni" required> <p id="errordni" class="error"></p><br><br>
+        <label for="email">Email*:</label>
+        <input type="email" id="email" required><p id="erroremail" class="error"></p><br><br>
+        <label for="password">Contraseña*:</label>
+        <input type="password" id="password" required><p id="errorpassword" class="error"></p><br><br>
+        <label for="repassword">Repetir Contraseña*:</label>
+        <input type="repassword" id="repassword" required><p id="errorpassword" class="error"></p><br><br>
+        <label for="description">Descripción(OPCINAL):</label>
+        <textarea name="description" rows="10" cols="30" id="description"></textarea> <p id="errordescription" class="error"></p><br><br>
+        <label for="fnacimiento">Fecha de Nacimiento:(dd/mm/yyyy):</label>
+        <input type="text" id="fnacimiento" > <p id="errorfnacimiento" class="error"></p><br><br>
+        <label for="politicas">Aceptas el tratamiento de los datos personales*:</label>
+        <input type="checkbox" name="politicas"  id="politicas" required> <p id="errorpoliticas" class="error"></p><br><br>
+        <button onclick="validar()" type="submit">Enviar</button>
+    </form>
+    
+    <script>
+        function validar(){
+        var nombre = document.getElementById("nombre").value.trim();
+        var apellido1 = document.getElementById("apellido1").value.trim();
+        var apellido2 = document.getElementById("apellido2").value.trim();
+        var dni = document.getElementById("dni").value.trim();
+        var email = document.getElementById("email").value.trim();
+        var password = document.getElementById("password").value.trim();
+        var repassword = document.getElementById("repassword").value.trim();
+        var description = document.getElementById("description").value.trim();
+        var fnacimiento = document.getElementById("fnacimiento").value.trim();
+        var politicas = document.getElementById("politicas").value.trim();
+        if (nombre == "")
+        
+        }
+    </script>
+
+</body>
+</html>
