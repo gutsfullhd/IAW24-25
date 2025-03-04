@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reserva de Habitaciones</title>
+   
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+        }
+        .resultado {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Reserva de Habitaciones</h1>
+        <form id="reservaForm">
+            <label for="tipoHabitacion">Tipo de Habitación:</label>
+            <select id="tipoHabitacion">
+                <option value="25">Individual (25€/noche)</option>
+                <option value="45">Doble (45€/noche)</option>
+                <option value="80">Triple (80€/noche)</option>
+            </select>
+
+            <label for="fechaEntrada">Fecha de Entrada:</label>
+            <input type="text" id="fechaEntrada" readonly>
+
+            <label for="fechaSalida">Fecha de Salida:</label>
+            <input type="text" id="fechaSalida" readonly>
+
+            <button type="button" id="calcularReserva">Calcular Reserva</button>
+        </form>
+
+        <div class="resultado" id="resultado">
+            <p><strong>Días reservados:</strong> <span id="diasReservados">0</span></p>
+            <p><strong>Precio total:</strong> <span id="precioTotal">0</span>€</p>
+        </div>
+    </div>
+
+ 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+   
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $(function() {
+           
+            $("#fechaEntrada").datepicker({
+                minDate: 0, 
+                maxDate: "+1Y",
+                onSelect: function(selectedDate) {
+                    
+                    $("#fechaSalida").datepicker("option", "minDate", selectedDate);
+                }
+            });
+
+            $("#fechaSalida").datepicker({
+                minDate: 0, 
+                maxDate: "+1Y",
+                onSelect: function(selectedDate) {
+                    
+                    $("#fechaEntrada").datepicker("option", "maxDate", selectedDate);
+                }
+            });
+
+           
+            $("#calcularReserva").click(function() {
+                var fechaEntrada = $("#fechaEntrada").datepicker("getDate");
+                var fechaSalida = $("#fechaSalida").datepicker("getDate");
+
+                if (!fechaEntrada || !fechaSalida) {
+                    alert("Por favor, selecciona ambas fechas.");
+                    return;
+                }
+
+               
+                var diferenciaTiempo = fechaSalida - fechaEntrada;
+                var diasReservados = Math.ceil(diferenciaTiempo / (1000 * 60 * 60 * 24));
+
+                if (diasReservados <= 0) {
+                    alert("La fecha de salida debe ser posterior a la fecha de entrada.");
+                    return;
+                }
+
+                
+                var precioNoche = parseFloat($("#tipoHabitacion").val());
+
+               
+                var precioTotal = diasReservados * precioNoche;
+
+                
+                $("#diasReservados").text(diasReservados);
+                $("#precioTotal").text(precioTotal.toFixed(2));
+            });
+        });
+    </script>
+</body>
+</html>
