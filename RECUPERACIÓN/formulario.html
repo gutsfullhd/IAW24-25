@@ -5,19 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulario</title>
     <style>
-        .error{
+        .error {
             color: red;
         }
     </style>
 </head>
 <body>
     <h1>Formulario</h1>
-    <form ><label for="nombre">Nombre*:</label>
+    <form>
+        <label for="nombre">Nombre*:</label>
         <input type="text" id="nombre" required> <p id="errornombre" class="error"></p><br><br>
         <label for="apellido1"> Apellido 1*:</label>
-        <input type="text" id="apellido1"  required><p id="errorapellido1" class="error"></p><br><br>
+        <input type="text" id="apellido1" required><p id="errorapellido1" class="error"></p><br><br>
         <label for="apellido2"> Apellido 2*:</label>
-        <input type="text" id="apellido2"  required><p id="errorapellido2" class="error"></p><br><br>
+        <input type="text" id="apellido2" required><p id="errorapellido2" class="error"></p><br><br>
         <label for="DNI">DNI*:</label>
         <input type="text" id="dni" required> <p id="errordni" class="error"></p><br><br>
         <label for="email">Email*:</label>
@@ -25,32 +26,114 @@
         <label for="password">Contraseña*:</label>
         <input type="password" id="password" required><p id="errorpassword" class="error"></p><br><br>
         <label for="repassword">Repetir Contraseña*:</label>
-        <input type="repassword" id="repassword" required><p id="errorpassword" class="error"></p><br><br>
-        <label for="description">Descripción(OPCINAL):</label>
-        <textarea name="description" rows="10" cols="30" id="description"></textarea> <p id="errordescription" class="error"></p><br><br>
+        <input type="password" id="repassword" required><p id="errorrepassword" class="error"></p><br><br>
+        <label for="description">Descripción:</label>
+        <textarea name="description" rows="10" cols="30" id="description" required></textarea> <p id="errordescription" class="error"></p><br><br>
         <label for="fnacimiento">Fecha de Nacimiento:(dd/mm/yyyy):</label>
-        <input type="text" id="fnacimiento" > <p id="errorfnacimiento" class="error"></p><br><br>
+        <input type="text" id="fnacimiento" required> <p id="errorfnacimiento" class="error"></p><br><br>
         <label for="politicas">Aceptas el tratamiento de los datos personales*:</label>
-        <input type="checkbox" name="politicas"  id="politicas" required> <p id="errorpoliticas" class="error"></p><br><br>
+        <input type="checkbox" name="politicas" id="politicas" required> <p id="errorpoliticas" class="error"></p><br><br>
         <button onclick="validar()" type="submit">Enviar</button>
     </form>
-    
+
     <script>
-        function validar(){
-        var nombre = document.getElementById("nombre").value.trim();
-        var apellido1 = document.getElementById("apellido1").value.trim();
-        var apellido2 = document.getElementById("apellido2").value.trim();
-        var dni = document.getElementById("dni").value.trim();
-        var email = document.getElementById("email").value.trim();
-        var password = document.getElementById("password").value.trim();
-        var repassword = document.getElementById("repassword").value.trim();
-        var description = document.getElementById("description").value.trim();
-        var fnacimiento = document.getElementById("fnacimiento").value.trim();
-        var politicas = document.getElementById("politicas").value.trim();
-        if (nombre == "")
-        
+        function validar() {
+            var nombre = document.getElementById("nombre").value.trim();
+            var apellido1 = document.getElementById("apellido1").value.trim();
+            var apellido2 = document.getElementById("apellido2").value.trim();
+            var dni = document.getElementById("dni").value.trim();
+            var email = document.getElementById("email").value.trim();
+            var password = document.getElementById("password").value.trim();
+            var repassword = document.getElementById("repassword").value.trim();
+            var description = document.getElementById("description").value.trim();
+            var fnacimiento = document.getElementById("fnacimiento").value.trim();
+            var politicas = document.getElementById("politicas").checked;
+
+            document.getElementById("errornombre").innerHTML = "";
+            document.getElementById("errorapellido1").innerHTML = "";
+            document.getElementById("errorapellido2").innerHTML = "";
+            document.getElementById("errordni").innerHTML = "";
+            document.getElementById("erroremail").innerHTML = "";
+            document.getElementById("errorpassword").innerHTML = "";
+            document.getElementById("errorrepassword").innerHTML = "";
+            document.getElementById("errordescription").innerHTML = "";
+            document.getElementById("errorfnacimiento").innerHTML = "";
+            document.getElementById("errorpoliticas").innerHTML = "";
+
+            
+            if (nombre === "") {
+                document.getElementById("errornombre").innerHTML = "Debes rellenar este campo";
+            }
+            if (apellido1 === "") {
+                document.getElementById("errorapellido1").innerHTML = "Debes rellenar este campo";
+            }
+            if (apellido2 === "") {
+                document.getElementById("errorapellido2").innerHTML = "Debes rellenar este campo";
+            }
+            if (dni === "") {
+                document.getElementById("errordni").innerHTML = "Debes rellenar este campo";
+            } else {
+                validarDNI(dni); I
+            }
+            if (email === "") {
+                document.getElementById("erroremail").innerHTML = "Debes rellenar este campo";
+            } else {
+                validaremail(email); 
+            }
+            if (password === "") {
+                document.getElementById("errorpassword").innerHTML = "Debes rellenar este campo";
+            } else if (password.length < 8) {
+                document.getElementById("errorpassword").innerHTML = "La contraseña debe tener al menos 8 caracteres";
+            }
+            if (repassword === "") {
+                document.getElementById("errorrepassword").innerHTML = "Debes rellenar este campo";
+            } else if (password !== repassword) {
+                document.getElementById("errorrepassword").innerHTML = "Las contraseñas no coinciden";
+            }
+            if (description === "") {
+                document.getElementById("errordescription").innerHTML = "Debes rellenar este campo";
+            }
+            if (fnacimiento === "") {
+                document.getElementById("errorfnacimiento").innerHTML = "Debes rellenar este campo";
+            }
+            if (!politicas) {
+                document.getElementById("errorpoliticas").innerHTML = "Debes aceptar este campo";
+            }
+        }
+
+        function validaremail(email) {
+            var validaremail = /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/;
+
+            if (validaremail.test(email)) {
+                document.getElementById("erroremail").innerHTML = "";
+                return true;
+            } else {
+                document.getElementById("erroremail").innerHTML = "El formato de email no es válido";
+                return false;
+            }
+        }
+
+        function validarDNI(dni) {
+            var dniRegex = /^\d{8}[A-Za-z]$/; 
+            var letras = "TRWAGMYFPDXBNJZSQVHLCKE";
+
+            if (!dniRegex.test(dni)) {
+                document.getElementById("errordni").innerHTML = "El formato del DNI no es válido";
+                return false;
+            }
+
+            var numero = dni.substr(0, 8); 
+            var letra = dni.substr(8, 1).toUpperCase(); 
+            var letraCalculada = letras[numero % 23]; 
+
+            if (letra !== letraCalculada) {
+                document.getElementById("errordni").innerHTML = "La letra del DNI no es válida";
+                return false;
+            }
+
+            document.getElementById("errordni").innerHTML = "";
+            return true;
         }
     </script>
-
 </body>
 </html>
