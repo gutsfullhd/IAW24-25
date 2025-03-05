@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo de Libros</title>
+    <style>
+        .book-item {
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1>Catálogo de Libros</h1>
+    <input type="number" id="book-id" placeholder="Introduce ID del libro">
+    <button id="search-by-id">Consultar por ID libro</button>
+    <button id="view-catalog">Ver catálogo</button>
+    <div id="results"></div>
+    <div id="error" class="error"></div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#view-catalog').click(function() {
+                $.ajax({
+                    url: 'https://gutendex.com/books/',
+                    method: 'GET',
+                    success: function(data) {
+                        displayBooks(data.results);
+                    },
+                    error: function() {
+                        $('#error').text('Error al obtener el catálogo de libros.');
+                    }
+                });
+            });
+
+            $('#search-by-id').click(function() {
+                var bookId = $('#book-id').val();
+                if (bookId > 0) {
+                    $.ajax({
+                        url: 'https://gutendex.com/books/' + bookId,
+                        method: 'GET',
+                        success: function(data) {
+                            displayBooks([data]);
+                        },
+                        error: function() {
+                            $('#error').text('Error al obtener el libro con ID ' + bookId + '.');
+                        }
+                    });
+                } else {
+                    $('#error').text('Por favor, introduce un ID de libro válido.');
+                }
+            });
+
+            function displayBooks(books) {
+                $('#results').empty();
+                $('#error').text('');
+                books.forEach(function(book) {
+                    var bookItem = `
+                        <div class="book-item">
+                            <h2>${book.title}</h2>
+                            <p><strong>Autor:</strong> ${book.authors.map(author => author.name).join(', ')}</p>
+                            <img src="${book.formats['image/jpeg']}" alt="${book.title}" width="100">
+                            <p><strong>Descargas:</strong> ${book.download_count}</p>
+                            <a href="${book.formats['text/plain']}" target="_blank">Descargar en formato TXT</a>
+                        </div>
+                    `;
+                    $('#results').append(bookItem);
+                });
+            }
+        });
+    </script>
+</body>
+</html>
